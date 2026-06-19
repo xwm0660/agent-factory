@@ -1,10 +1,16 @@
-// build instance of openai
-import { OpenAI } from "openai";
+import OpenAI, { type ClientOptions } from "openai";
 import { config } from "dotenv";
+import { ProxyAgent, fetch } from "undici";
 
 config();
-const { OPENAI_API_KEY } = process.env;
+
+const proxyUrl = process.env.HTTPS_PROXY ?? "http://127.0.0.1:7897";
+const dispatcher = new ProxyAgent(proxyUrl);
 
 export const openai = new OpenAI({
-  apiKey: OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY!,
+  fetch: fetch as unknown as NonNullable<ClientOptions["fetch"]>,
+  fetchOptions: {
+    dispatcher,
+  },
 });

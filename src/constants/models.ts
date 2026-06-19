@@ -1,3 +1,4 @@
 export const MODELS = {
- DEFAULT: "gpt-5"
-} 
+    CHAT: "deepseek-chat",
+    REASONING: "deepseek-reasoner"
+  } as const;

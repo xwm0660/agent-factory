@@ -1,4 +1,6 @@
 export interface VideoIdea {
+    script?: string;
     title: string;
-    script: string;
+    angle: string;
+    story: string;
 }
